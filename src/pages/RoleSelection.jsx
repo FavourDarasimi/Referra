@@ -34,9 +34,9 @@ const RoleSelection = () => {
     }
   };
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <AuthNavbar selectedRole={selectedRole} />
-      <div className="w-[480px] flex flex-col justify-center mx-auto h-full p-[32px] gap-[40px]">
+      <div className="w-[480px] flex flex-col justify-center mx-auto flex-1 p-[32px] gap-[40px]">
         <h1 className="font-bold text-[24px]">
           How do you want to use referra?
         </h1>

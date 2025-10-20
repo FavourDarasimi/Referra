@@ -8,6 +8,10 @@ const RoleCard = ({
   selectedRole,
   setSelectedRole,
 }) => {
+  const handleClick = () => {
+    setSelectedRole(title);
+    localStorage.setItem("role", title);
+  };
   return (
     <div
       className={`p-[20px] border-[1px] cursor-pointer transition-all duration-500 space-y-[12px] rounded-[12px] ${
@@ -15,10 +19,7 @@ const RoleCard = ({
           ? "bg-[#F0EBFD] border-[#6938EF]"
           : "border-[#E4E7EC]"
       }`}
-      onClick={() => {
-        setSelectedRole(title);
-        localStorage.setItem("role", title);
-      }}
+      onClick={() => handleClick()}
     >
       <div
         className={`p-[8px] w-fit rounded-[8px] transition-all duration-500 ${
