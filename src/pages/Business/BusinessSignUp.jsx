@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AuthNavbar from "../../components/AuthNavbar";
 import { MdReportGmailerrorred } from "react-icons/md";
 import Toast from "../../components/Toast";
+import { useNavigate } from "react-router-dom";
+import { Context } from "../../context/Context";
 
 const BusinessSignUp = () => {
+  const { addToast } = useContext(Context);
+  const navigate = useNavigate();
   const [error, setError] = useState({
     email: "",
     password: "",
@@ -12,19 +16,6 @@ const BusinessSignUp = () => {
     email: "",
     password: "",
   });
-  const [errortoastOpen, setErrorToastOpen] = useState(false);
-  const [successtoastOpen, setSuccessToastOpen] = useState(false);
-  const [toasts, setToasts] = useState([]);
-
-  const addToast = (variant, title, type) => {
-    const newToast = { variant, title, type };
-    setToasts((prev) => [...prev, newToast]);
-    console.log(`newToast ${JSON.stringify(toasts)}`);
-  };
-
-  const removeToast = (title) => {
-    setToasts((prev) => prev.filter((toast) => toast.title != title));
-  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,46 +24,30 @@ const BusinessSignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newError = {};
-    if (formData.email == "" || !formData.email.includes("@")) {
+    if (
+      formData.email == "" ||
+      !formData.email.includes("@") ||
+      !formData.email.includes(".com")
+    ) {
       newError.email = "Invalid Email";
     }
     if (formData.password == "") {
       newError.password = "Invalid Password";
     }
-    if (newError) {
-      setErrorToastOpen(true);
+
+    if (Object.keys(newError).length > 0) {
+      addToast("secondary", "Error creating account", "error");
       setError(newError);
     } else {
+      addToast("secondary", "Account created successfully", "success");
+      setError({});
+      navigate("/business/registration/otp/verification");
     }
-    console.log(toasts);
   };
 
   return (
-    <div className="flex flex-col h-screen relative ">
+    <div className="flex flex-col h-screen">
       <AuthNavbar />
-      {errortoastOpen ? (
-        <div className="absolute top-[124px] left-1/2 -translate-x-1/2 transition-all duration-1000">
-          <Toast
-            variant="secondary"
-            title="Error creating account"
-            type="error"
-            setToastOpen={setErrorToastOpen}
-          />
-        </div>
-      ) : (
-        ""
-      )}
-      {/* <div className="absolute top-[124px] left-1/2 -translate-x-1/2 transition-all duration-1000">
-        {toasts.map((toast) => {
-          <Toast
-            variant={toast.variant}
-            title={toast.title}
-            type={toast.type}
-            removeToast={removeToast}
-          />;
-        })}{" "}
-      </div> */}
-
       <div className="flex-1 flex flex-col items-center justify-center ">
         <div className="h-fit space-y-[40px] w-[480px] border-[1px] border-[#E4E7EC] rounded-[20px] p-[32px]">
           <h1 className="text-[24px] font-bold text-center">
@@ -127,7 +102,7 @@ const BusinessSignUp = () => {
             </div>
             <div className="space-y-[32px]">
               <div className="flex gap-[12px]">
-                <input type="checkbox" />
+                <input type="checkbox" required />
                 <h1 className="text-[14px]">
                   I have read and agree to the{" "}
                   <span className="text-[#6938EF] underline">

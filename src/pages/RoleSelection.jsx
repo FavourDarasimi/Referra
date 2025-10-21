@@ -26,7 +26,7 @@ const RoleSelection = () => {
 
   const handleContinue = () => {
     if (selectedRole === "As a Business/Organization") {
-      navigate("/business/signup");
+      navigate("/business/registration/signup");
     } else if (selectedRole === "As a Referee/Individual") {
       navigate("/individual/signup");
     } else if (selectedRole === null) {
