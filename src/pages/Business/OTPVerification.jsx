@@ -110,7 +110,6 @@ const OTPVerification = () => {
   return (
     <div className="flex flex-col h-screen">
       <AuthNavbar />
-      <div className="space-y-3 absolute top-[124px] left-1/2 -translate-x-1/2 transition-all duration-1000"></div>
       <div className="flex-1 flex flex-col items-center justify-center ">
         <div className="w-[480px] border-[1px] border-[#E4E7EC] rounded-[20px] p-[32px] space-y-[40px]">
           <div className="text-center space-y-[16px]">
@@ -128,7 +127,7 @@ const OTPVerification = () => {
                 <input
                   className={`border-[1px]  rounded-[8px] py-[16px] px-[10px] text-[14px]  text-[#101828]  outline-none w-full text-center ${
                     error
-                      ? "not-placeholder-shown:border-[#F04438] bg-[#FFFBFA] border-[#E4E7EC] placeholder:text-[#98A2B3]"
+                      ? "border-[#F04438] bg-[#FFFBFA] placeholder:text-[#98A2B3]"
                       : success
                       ? "not-placeholder-shown:border-[#12B76A] bg-[#F6FEF9] border-[#E4E7EC] placeholder:text-[#98A2B3]"
                       : "not-placeholder-shown:border-[#6938EF] border-[#E4E7EC] placeholder:text-[#98A2B3]"
@@ -143,7 +142,7 @@ const OTPVerification = () => {
                 <input
                   className={`border-[1px]  rounded-[8px] py-[16px] px-[10px] text-[14px]  text-[#101828]  outline-none w-full text-center ${
                     error
-                      ? "not-placeholder-shown:border-[#F04438] bg-[#FFFBFA] border-[#E4E7EC] placeholder:text-[#98A2B3]"
+                      ? "border-[#F04438] bg-[#FFFBFA] placeholder:text-[#98A2B3]"
                       : success
                       ? "not-placeholder-shown:border-[#12B76A] bg-[#F6FEF9] border-[#E4E7EC] placeholder:text-[#98A2B3]"
                       : "not-placeholder-shown:border-[#6938EF] border-[#E4E7EC] placeholder:text-[#98A2B3]"
@@ -158,7 +157,7 @@ const OTPVerification = () => {
                 <input
                   className={`border-[1px]  rounded-[8px] py-[16px] px-[10px] text-[14px]  text-[#101828]  outline-none w-full text-center ${
                     error
-                      ? "not-placeholder-shown:border-[#F04438] bg-[#FFFBFA] border-[#E4E7EC] placeholder:text-[#98A2B3]"
+                      ? "border-[#F04438] bg-[#FFFBFA] placeholder:text-[#98A2B3]"
                       : success
                       ? "not-placeholder-shown:border-[#12B76A] bg-[#F6FEF9] border-[#E4E7EC] placeholder:text-[#98A2B3]"
                       : "not-placeholder-shown:border-[#6938EF] border-[#E4E7EC] placeholder:text-[#98A2B3]"
@@ -173,7 +172,7 @@ const OTPVerification = () => {
                 <input
                   className={`border-[1px]  rounded-[8px] py-[16px] px-[10px] text-[14px]  text-[#101828]  outline-none w-full text-center ${
                     error
-                      ? "not-placeholder-shown:border-[#F04438] bg-[#FFFBFA] border-[#E4E7EC] placeholder:text-[#98A2B3]"
+                      ? "border-[#F04438] bg-[#FFFBFA] placeholder:text-[#98A2B3]"
                       : success
                       ? "not-placeholder-shown:border-[#12B76A] bg-[#F6FEF9] border-[#E4E7EC] placeholder:text-[#98A2B3]"
                       : "not-placeholder-shown:border-[#6938EF] border-[#E4E7EC] placeholder:text-[#98A2B3]"
@@ -188,7 +187,7 @@ const OTPVerification = () => {
                 <input
                   className={`border-[1px]  rounded-[8px] py-[16px] px-[10px] text-[14px]  text-[#101828]  outline-none w-full text-center ${
                     error
-                      ? "not-placeholder-shown:border-[#F04438] bg-[#FFFBFA] border-[#E4E7EC] placeholder:text-[#98A2B3]"
+                      ? "border-[#F04438] bg-[#FFFBFA] placeholder:text-[#98A2B3]"
                       : success
                       ? "not-placeholder-shown:border-[#12B76A] bg-[#F6FEF9] border-[#E4E7EC] placeholder:text-[#98A2B3]"
                       : "not-placeholder-shown:border-[#6938EF] border-[#E4E7EC] placeholder:text-[#98A2B3]"
@@ -203,7 +202,7 @@ const OTPVerification = () => {
                 <input
                   className={`border-[1px]  rounded-[8px] py-[16px] px-[10px] text-[14px]  text-[#101828]  outline-none w-full text-center ${
                     error
-                      ? "not-placeholder-shown:border-[#F04438] bg-[#FFFBFA] border-[#E4E7EC] placeholder:text-[#98A2B3]"
+                      ? "border-[#F04438] bg-[#FFFBFA] placeholder:text-[#98A2B3]"
                       : success
                       ? "not-placeholder-shown:border-[#12B76A] bg-[#F6FEF9] border-[#E4E7EC] placeholder:text-[#98A2B3]"
                       : "not-placeholder-shown:border-[#6938EF] border-[#E4E7EC] placeholder:text-[#98A2B3]"

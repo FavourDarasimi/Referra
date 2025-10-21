@@ -63,7 +63,7 @@ const BusinessSignUp = () => {
                   <input
                     name="email"
                     type="text"
-                    className={`h-[56px] w-full rounded-full border-[1px]  p-[16px] outline-none focus:border-[#6938EF] ${
+                    className={`h-[56px] w-full rounded-full border-[1px] text-[14px] p-[16px] outline-none focus:border-[#6938EF] ${
                       error.email ? "border-[#F04438]" : "border-[#E4E7EC]"
                     }`}
                     placeholder="e.g.name@gmail.com"
@@ -84,7 +84,7 @@ const BusinessSignUp = () => {
                   <input
                     name="password"
                     type="password"
-                    className={`h-[56px] w-full rounded-full border-[1px]  p-[16px] outline-none focus:border-[#6938EF] ${
+                    className={`h-[56px] w-full rounded-full border-[1px] text-[14px] p-[16px] outline-none focus:border-[#6938EF] ${
                       error.password ? "border-[#F04438]" : "border-[#E4E7EC]"
                     }`}
                     placeholder="Enter your Password"

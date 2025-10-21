@@ -11,6 +11,7 @@ import { Routes, Route } from "react-router-dom";
 import { Context } from "./context/Context";
 import Toast from "./components/Toast";
 import BusinessProfile from "./pages/Business/BusinessProfile";
+import BusinessProfileImage from "./pages/Business/BusinessProfileImage";
 
 function App() {
   const { toasts, removeToast } = useContext(Context);
@@ -44,6 +45,10 @@ function App() {
           element={<OTPVerification />}
         />
         <Route path="/business/profile" element={<BusinessProfile />} />
+        <Route
+          path="/business/profile/image"
+          element={<BusinessProfileImage />}
+        />
 
         {/* Individual Routes */}
         <Route path="/individual/signin" element={<IndividualLogin />} />
