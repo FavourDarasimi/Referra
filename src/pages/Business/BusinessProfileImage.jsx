@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AuthNavbar from "../../components/AuthNavbar";
 import { RxCross2 } from "react-icons/rx";
 import { MdUploadFile } from "react-icons/md";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button";
 
 const BusinessProfileImage = () => {
   const [file, setFile] = useState(null);
@@ -29,11 +30,11 @@ const BusinessProfileImage = () => {
 
   const handleContinue = (e) => {
     e.preventDefault();
-    navigate("/business/registration/signin");
+    navigate("/business/signin");
   };
   const handleBack = (e) => {
     e.preventDefault();
-    navigate("/business/profile");
+    navigate(-1);
   };
 
   return (
@@ -93,33 +94,38 @@ const BusinessProfileImage = () => {
                   <div className="flex-grow h-px bg-[#E4E7EC]"></div>
                 </div>
 
-                <button
-                  onClick={() => document.getElementById("file-upload").click()}
-                  className="cursor-pointer bg-[#6938EF] text-white text-[14px] h-[40px] font-medium py-[4px] px-[18px] rounded-full"
-                >
-                  Browse Files
-                </button>
+                <Button
+                  type="primary"
+                  size="small"
+                  title="Browse Files"
+                  styles="font-medium py-[4px] px-[18px]"
+                  handleSubmit={() =>
+                    document.getElementById("file-upload").click()
+                  }
+                />
               </>
             )}
           </div>
           <div className=" grid grid-cols-3 gap-[40px] w-[400px]">
-            <button
-              onClick={handleBack}
-              className="cursor-pointer border-[1px] border-[#E4E7EC] text-[#667085] px-[12px] py-[18px] rounded-full text-[14px] flex items-center gap-[10px]"
-            >
-              <IoArrowBack className="w-[20px] h-[20px]" /> Back
-            </button>
-            <button
-              onClick={handleContinue}
-              className={`${
+            <Button
+              type="neutralOutline"
+              full={true}
+              title="Back"
+              Icon={IoArrowBack}
+              handleSubmit={handleBack}
+            />
+
+            <Button
+              full={true}
+              type="primary"
+              title="Continue"
+              handleSubmit={handleContinue}
+              styles={`col-span-2 ${
                 file
                   ? "cursor-pointer bg-[#6938EF]"
-                  : "bg-[#6938EF]/50 cursor-not-allowed"
-              } text-white px-10 py-2 rounded-full font-medium transition col-span-2`}
-              disabled={!file}
-            >
-              Continue
-            </button>
+                  : "bg-[#6938EF]/50 cursor-not-allowed pointer-events-none"
+              }`}
+            />
           </div>
         </div>
       </div>

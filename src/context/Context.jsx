@@ -1,6 +1,5 @@
 // src/context/Context.jsx
 import { createContext, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
 export const Context = createContext(null);
 

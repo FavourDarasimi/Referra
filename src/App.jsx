@@ -2,7 +2,7 @@ import "./App.css";
 import { useContext } from "react";
 import BusinessLogin from "./pages/Business/BusinessLogin";
 import BusinessSignUp from "./pages/Business/BusinessSignUp";
-import OTPVerification from "./pages/Business/OTPVerification";
+import OTPVerification from "./pages/Business/SignUpOTPVerification";
 import IndividualLogin from "./pages/Individual/IndividualLogin";
 import IndividualSignUp from "./pages/Individual/IndividualSignUp";
 import Registration from "./pages/Registration";
@@ -12,6 +12,10 @@ import { Context } from "./context/Context";
 import Toast from "./components/Toast";
 import BusinessProfile from "./pages/Business/BusinessProfile";
 import BusinessProfileImage from "./pages/Business/BusinessProfileImage";
+import ResetPassword from "./pages/Business/ResetPassword";
+import ResetPasswordOTPVerification from "./pages/Business/ResetPasswordOTPVerification";
+import ResetPasswordForm from "./pages/Business/ResetPasswordForm";
+import ResetPasswordSuccess from "./pages/Business/ResetPasswordSuccess";
 
 function App() {
   const { toasts, removeToast } = useContext(Context);
@@ -32,22 +36,29 @@ function App() {
         <Route path="/role" element={<RoleSelection />} />
 
         {/* Business Routes */}
+        <Route path="/business/signup" element={<BusinessSignUp />} />
+        <Route path="/business/signin" element={<BusinessLogin />} />
         <Route
-          path="/business/registration/signup"
-          element={<BusinessSignUp />}
-        />
-        <Route
-          path="/business/registration/signin"
-          element={<BusinessLogin />}
-        />
-        <Route
-          path="/business/registration/otp/verification"
+          path="/business/signup/otp/verification"
           element={<OTPVerification />}
         />
         <Route path="/business/profile" element={<BusinessProfile />} />
         <Route
           path="/business/profile/image"
           element={<BusinessProfileImage />}
+        />
+        <Route path="/business/forgot-password" element={<ResetPassword />} />
+        <Route
+          path="/business/forgot-password/password-reset"
+          element={<ResetPasswordForm />}
+        />
+        <Route
+          path="/business/forgot-password/success"
+          element={<ResetPasswordSuccess />}
+        />
+        <Route
+          path="/business/forgot-password/otp/verification"
+          element={<ResetPasswordOTPVerification />}
         />
 
         {/* Individual Routes */}

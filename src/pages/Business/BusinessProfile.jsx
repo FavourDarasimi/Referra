@@ -1,6 +1,6 @@
-import React from "react";
 import AuthNavbar from "../../components/AuthNavbar";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button";
 
 const BusinessProfile = () => {
   const navigate = useNavigate();
@@ -40,13 +40,13 @@ const BusinessProfile = () => {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            className="w-full bg-[#6938EF] text-white rounded-full  text-[14px] hover:bg-[#6033D9] transition-all duration-300 h-[56px] focus:border-[2px] focus:border-[#D1C1FA]"
-          >
-            Continue
-          </button>
+
+          <Button
+            type="primary"
+            title="Continue"
+            handleSubmit={handleSubmit}
+            full={true}
+          />
         </div>
       </div>
     </div>

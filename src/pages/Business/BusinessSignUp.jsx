@@ -1,9 +1,11 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import AuthNavbar from "../../components/AuthNavbar";
 import { MdReportGmailerrorred } from "react-icons/md";
-import Toast from "../../components/Toast";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../context/Context";
+import Button from "../../components/Button";
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { IoArrowBack } from "react-icons/io5";
 
 const BusinessSignUp = () => {
   const { addToast } = useContext(Context);
@@ -16,6 +18,7 @@ const BusinessSignUp = () => {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -41,7 +44,7 @@ const BusinessSignUp = () => {
     } else {
       addToast("secondary", "Account created successfully", "success");
       setError({});
-      navigate("/business/registration/otp/verification");
+      navigate("/business/signup/otp/verification");
     }
   };
 
@@ -83,14 +86,27 @@ const BusinessSignUp = () => {
                 <div className="relative">
                   <input
                     name="password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className={`h-[56px] w-full rounded-full border-[1px] text-[14px] p-[16px] outline-none focus:border-[#6938EF] ${
                       error.password ? "border-[#F04438]" : "border-[#E4E7EC]"
                     }`}
                     placeholder="Enter your Password"
                     value={formData.password}
                     onChange={(e) => handleChange(e)}
-                  />
+                  />{" "}
+                  <button
+                    type="button"
+                    className={`absolute inset-y-0   ${
+                      error.password ? "right-10" : "right-3"
+                    }`}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <AiOutlineEye className="w-[20px] h-[20px]" />
+                    ) : (
+                      <AiOutlineEyeInvisible className="w-[20px] h-[20px]" />
+                    )}
+                  </button>
                   {error.password && (
                     <MdReportGmailerrorred className="absolute right-3 -translate-y-1/2 top-[50%] text-[#F04438] w-[20px] h-[20px]" />
                   )}
@@ -110,12 +126,8 @@ const BusinessSignUp = () => {
                   </span>
                 </h1>
               </div>
-              <button
-                type="submit"
-                className="w-full bg-[#6938EF] text-white rounded-full  text-[14px] hover:bg-[#6033D9] transition-all duration-300 h-[56px] focus:border-[2px] focus:border-[#D1C1FA]"
-              >
-                Create account
-              </button>
+
+              <Button full={true} type="primary" title="Create account" />
             </div>
           </form>
         </div>

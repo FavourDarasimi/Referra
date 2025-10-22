@@ -6,14 +6,6 @@ import { PiWarningOctagonBold } from "react-icons/pi";
 import { RxCross2 } from "react-icons/rx";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 const Toast = ({ Icon, type, title, variant, removeToast }) => {
-  //   useEffect(() => {
-  //     const timer = setTimeout(() => {
-  //       removeToast(title);
-  //     }, 3000);
-
-  //     return () => clearTimeout(timer);
-  //   }, [title]);
-
   const handleCloseToast = () => {
     removeToast(title);
   };
