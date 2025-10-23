@@ -3,6 +3,7 @@ import React from "react";
 const Button = ({
   full,
   Icon = null,
+  IconRight = null,
   type,
   size = "default",
   handleSubmit,
@@ -41,9 +42,10 @@ const Button = ({
       }  cursor-pointer flex justify-center items-center gap-[4px]`}
       disabled={disabled}
     >
-      {Icon ? <Icon className={`${iconSize[type]}`} /> : ""}
+      {IconRight ? "" : Icon ? <Icon className={`${iconSize[size]}`} /> : ""}
 
       {title}
+      {IconRight ? Icon ? <Icon className={`${iconSize[size]}`} /> : "" : ""}
     </button>
   );
 };

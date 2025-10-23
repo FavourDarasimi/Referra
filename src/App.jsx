@@ -16,6 +16,7 @@ import ResetPassword from "./pages/Business/ResetPassword";
 import ResetPasswordOTPVerification from "./pages/Business/ResetPasswordOTPVerification";
 import ResetPasswordForm from "./pages/Business/ResetPasswordForm";
 import ResetPasswordSuccess from "./pages/Business/ResetPasswordSuccess";
+import BusinessDashbord from "./pages/Business/BusinessDashbord";
 
 function App() {
   const { toasts, removeToast } = useContext(Context);
@@ -60,6 +61,7 @@ function App() {
           path="/business/forgot-password/otp/verification"
           element={<ResetPasswordOTPVerification />}
         />
+        <Route path="/business/dashboard" element={<BusinessDashbord />} />
 
         {/* Individual Routes */}
         <Route path="/individual/signin" element={<IndividualLogin />} />
