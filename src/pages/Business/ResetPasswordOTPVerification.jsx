@@ -2,9 +2,16 @@ import AuthNavbar from "../../components/AuthNavbar";
 import OTPInput from "../../components/OTPForm";
 import { IoArrowBack } from "react-icons/io5";
 import Button from "../../components/Button";
+import { useNavigate } from "react-router-dom";
 
 const ResetPasswordOTPVerification = () => {
   const userOTP = 256901;
+  const navigate = useNavigate();
+
+  const handleBack = (e) => {
+    e.preventDefault();
+    navigate(-1);
+  };
   return (
     <div className="flex flex-col h-screen">
       <AuthNavbar />
@@ -27,6 +34,7 @@ const ResetPasswordOTPVerification = () => {
               size="mini"
               title="Back"
               Icon={IoArrowBack}
+              handleSubmit={handleBack}
             />
           </div>
         </div>
