@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronDown, ChevronUp, Star } from "lucide-react";
 import { TiTick } from "react-icons/ti";
 import { FaArrowRight } from "react-icons/fa6";
@@ -10,10 +10,12 @@ import { GiCheckMark } from "react-icons/gi";
 import { BiSort } from "react-icons/bi";
 import { IoFilterOutline } from "react-icons/io5";
 import BusinessDashBoardFilter from "../../components/BusinessDashBoardFilter";
+import BusinessDashboardSort from "../../components/BusinessDashboardSort";
 
 const BusinessDashbord = () => {
   const [activeNav, setActiveNav] = useState("Overview");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
 
   const stats = [
     { label: "Total created", value: "58" },
@@ -62,20 +64,48 @@ const BusinessDashbord = () => {
     return "bg-[#FEF4E6] text-[#AF6606] border-[0.5px] border-[#F79009]";
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        !event.target.closest(".filter-menu") &&
+        !event.target.closest(".menu-button-filter")
+      ) {
+        setIsFilterOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        !event.target.closest(".sort-menu") &&
+        !event.target.closest(".menu-button-sort")
+      ) {
+        setIsSortOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   return (
     <div className="flex flex-col h-screen bg-white">
       {/* Top Navbar */}
 
-      <BusinessTopBar userName="Michael" />
-
+      <div className="fixed top-0 left-0 right-0 z-30 bg-white">
+        <BusinessTopBar userName="Michael" />
+      </div>
       {/* Main Content */}
       <div className="flex-1 flex bg-[#F9FAFB] p-[20px] gap-[20px]">
         {/* Sidebar */}
 
-        <BusinessSideBar activeNav={activeNav} setActiveNav={setActiveNav} />
+        <div className="fixed left-0 top-[80px] flex-1 bottom-0 z-20">
+          <BusinessSideBar activeNav={activeNav} setActiveNav={setActiveNav} />
+        </div>
 
         {/* Page Content */}
-        <div className="flex-1 overflow-auto space-y-[32px] bg-white rounded-[20px] p-[24px]">
+        <div className="flex-1 ml-[280px] mt-[80px] space-y-[32px] bg-white rounded-[20px] p-[24px]">
           <h1 className="text-[24px] text-[#344054] font-semibold">OverView</h1>
           {/* Welcome Section */}
           <div className="bg-[#F6F4FB] relative overflow-hidden rounded-[20px] p-[40px] mb-8 flex gap-[24px] justify-between items-center">
@@ -146,13 +176,19 @@ const BusinessDashbord = () => {
                   placeholder="Search"
                   className="px-[12px] py-[8px] border-[1px] border-[#D0D3D9] rounded-full text-sm w-[276px] outline-none"
                 />
-                <button className="flex items-center gap-[2px] h-[40px] px-[12px] py-[4px] text-sm font-medium text-[#667085] border-[1px] border-[#D0D3D9] rounded-full transition-all">
-                  Sort by <BiSort className="w-[20px] h-[20px]" />
-                </button>
+                <div className="relative">
+                  <button
+                    onClick={() => setIsSortOpen(!isSortOpen)}
+                    className="menu-button-sort flex items-center gap-[2px] h-[40px] px-[12px] py-[4px] text-sm font-medium text-[#667085] border-[1px] border-[#D0D3D9] rounded-full transition-all"
+                  >
+                    Sort by <BiSort className="w-[20px] h-[20px]" />
+                  </button>
+                  {isSortOpen ? <BusinessDashboardSort /> : ""}
+                </div>
                 <div className="relative">
                   <button
                     onClick={() => setIsFilterOpen(!isFilterOpen)}
-                    className="flex items-center gap-[2px] h-[40px] px-[12px] py-[4px] text-sm font-medium text-[#667085] border-[1px] border-[#D0D3D9] rounded-full transition-all"
+                    className="menu-button-filter flex items-center gap-[2px] h-[40px] px-[12px] py-[4px] text-sm font-medium text-[#667085] border-[1px] border-[#D0D3D9] rounded-full transition-all"
                   >
                     Filter <IoFilterOutline className="w-[20px] h-[20px]" />
                   </button>

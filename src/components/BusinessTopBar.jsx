@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import Brand from "../assets/Brand.png";
+import { CiUser } from "react-icons/ci";
+import { LuMessageCircleQuestion } from "react-icons/lu";
+import { CiTrash } from "react-icons/ci";
 
 const BusinessTopBar = ({ userName = "Michael" }) => {
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        !event.target.closest(".user-menu") &&
+        !event.target.closest(".menu-button-user")
+      ) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
 
   return (
     <div className="border-b border-gray-200 bg-white">
@@ -31,35 +47,32 @@ const BusinessTopBar = ({ userName = "Michael" }) => {
 
             {/* User Profile Dropdown */}
             <div className="relative">
-              <button
-                onClick={() => setIsProfileOpen(!isProfileOpen)}
-                className="flex items-center gap-[8px] h-[48px] px-[12px] py-[8px] border-[1px] border-[#E4E7EC] rounded-full transition-all"
-              >
+              <button className=" flex items-center gap-[8px] h-[48px] px-[12px] py-[8px] border-[1px] border-[#E4E7EC] rounded-full transition-all">
                 <div className="bg-[#F0EBFD] border-[1px] border-[#6938EF] px-[8px] py-[4px] h-[32px] rounded-full flex items-center justify-center">
                   <FaUser className="w-[16px] h-[16px] fill-[#6938EF]" />
                 </div>
                 <span className="text-[#101828] text-[14px]">
                   Hi, {userName}
                 </span>
-                <ChevronDown className="w-[16px] h-[16px] text-[#667085]" />
+                <ChevronDown
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                  className="menu-button-user w-[16px] h-[16px] text-[#667085] cursor-pointer"
+                />
               </button>
 
               {/* Profile Dropdown Menu */}
-              {isProfileOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                  <div className="p-3 border-b border-gray-200">
-                    <p className="text-sm font-semibold text-gray-900">
-                      {userName}
-                    </p>
-                    <p className="text-xs text-gray-500">user@example.com</p>
-                  </div>
-                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all">
+              {isUserMenuOpen && (
+                <div className="user-menu absolute right-0 mt-2 w-[212px] bg-white border-[1px] border-[#F2F4F7] rounded-[12px] shadow-lg z-50">
+                  <button className="w-full p-[12px] text-[12px] flex gap-[12px] items-center text-[#475467]  transition-all">
                     Profile Settings
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all">
+                  <button className="w-full p-[12px] text-[12px] flex gap-[12px] items-center text-[#475467]  transition-all">
                     Account
                   </button>
-                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all border-t border-gray-200">
+                  <button className="w-full p-[12px] text-[12px] flex gap-[12px] items-center text-[#475467]  transition-all">
+                    Account
+                  </button>
+                  <button className="w-full p-[12px] text-[12px] flex gap-[12px] items-center text-[#F04438 transition-all border-t-[1px] border-[#F2F4F7] ">
                     Logout
                   </button>
                 </div>

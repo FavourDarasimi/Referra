@@ -1,11 +1,28 @@
-import { useState } from "react";
-import { ChevronUp, Star } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronUp, Star, ChevronDown } from "lucide-react";
 
 const BusinessDashBoardFilter = () => {
   const [filterExpanded, setFilterExpanded] = useState(true);
   const [ratingExpanded, setRatingExpanded] = useState(true);
   const [ratingMin, setRatingMin] = useState(1.5);
   const [ratingMax, setRatingMax] = useState(4.8);
+  const [minValue, setMinValue] = useState(1.5);
+  const [maxValue, setMaxValue] = useState(4.8);
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleMinChange = (e) => {
+    const value = parseFloat(e.target.value);
+    if (value <= maxValue) {
+      setMinValue(value);
+    }
+  };
+
+  const handleMaxChange = (e) => {
+    const value = parseFloat(e.target.value);
+    if (value >= minValue) {
+      setMaxValue(value);
+    }
+  };
 
   const dateOptions = [
     { label: "Last 24 hours", count: 93 },
@@ -15,24 +32,24 @@ const BusinessDashBoardFilter = () => {
   ];
 
   return (
-    <div className="absolute right-0 mt-2  w-[324px] bg-white border-[1px] border-[#E4E7EC] rounded-[8px] space-y-[8px] z-50 shadow-2xl">
+    <div className="filter-menu absolute right-0 mt-2  w-[324px] bg-white border-[1px] border-[#E4E7EC] rounded-[8px] space-y-[8px] z-50 shadow-2xl">
       <div className="px-[16px] py-[8px] flex items-center justify-between border-b-[1px] border-[#E4E4E7] ">
         <h1 className="text-[16px] font-bold">Filter</h1>
         <h1 className="text-[12px] font-semibold text-[#F04438]">Clear all</h1>
       </div>
       <div className="px-[16px]  ">
-        <div className="py-[24px] space-y-[16px]">
+        <div className="py-[24px] space-y-[16px] border-b-[1px] border-[#E4E4E7]">
           <div className="flex justify-between">
             <h1 className="text-[16px] font-bold">Date Range</h1>
             {filterExpanded ? (
               <ChevronUp
                 onClick={() => setFilterExpanded(!filterExpanded)}
-                className="w-[24px] h-[24px] text-[#101828]"
+                className="w-[24px] h-[24px] text-[#101828] cursor-pointer"
               />
             ) : (
               <ChevronDown
                 onClick={() => setFilterExpanded(!filterExpanded)}
-                className="w-[24px] h-[24px] text-[#101828]"
+                className="w-[24px] h-[24px] text-[#101828] cursor-pointer"
               />
             )}
           </div>
@@ -90,33 +107,54 @@ const BusinessDashBoardFilter = () => {
             {ratingExpanded ? (
               <ChevronUp
                 onClick={() => setRatingExpanded(!ratingExpanded)}
-                className="w-[24px] h-[24px] text-[#101828]"
+                className="w-[24px] h-[24px] text-[#101828] cursor-pointer"
               />
             ) : (
               <ChevronDown
                 onClick={() => setRatingExpanded(!ratingExpanded)}
-                className="w-[24px] h-[24px] text-[#101828]"
+                className="w-[24px] h-[24px] text-[#101828] cursor-pointer"
               />
             )}
           </div>
           {ratingExpanded && (
             <div className="space-y-[20px]">
               {/* Range Slider */}
-              <div className="flex items-center gap-3">
-                <input
-                  type="range"
-                  min="0"
-                  max="5"
-                  step="0.1"
-                  value={ratingMin}
-                  onChange={(e) => setRatingMin(parseFloat(e.target.value))}
-                  className="flex-1 h-1 bg-gray-300 rounded appearance-none cursor-pointer accent-[#6938EF]"
-                  style={{
-                    background: `linear-gradient(to right, #6938EF 0%, #6938EF ${
-                      ((ratingMin - 0) / 5) * 100
-                    }%, #E4E7EC ${((ratingMin - 0) / 5) * 100}%, #E4E7EC 100%)`,
-                  }}
-                />
+
+              <div className="space-y-4">
+                <div className="relative h-1 bg-[#E4E7EC] rounded-full">
+                  {/* Progress bar */}
+                  <div
+                    className="absolute h-1 bg-[#6938EF] rounded-full"
+                    style={{
+                      left: `${(minValue / 5) * 100}%`,
+                      right: `${100 - (maxValue / 5) * 100}%`,
+                    }}
+                  ></div>
+
+                  {/* Min slider */}
+                  <input
+                    type="range"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    value={minValue}
+                    onChange={handleMinChange}
+                    className="absolute w-full h-1 top-0 appearance-none bg-transparent cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#6938EF] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:pointer-events-auto [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#6938EF] [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-none"
+                    style={{ zIndex: minValue > 2.5 ? "5" : "3" }}
+                  />
+
+                  {/* Max slider */}
+                  <input
+                    type="range"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    value={maxValue}
+                    onChange={handleMaxChange}
+                    className="absolute w-full h-1 top-0 appearance-none bg-transparent cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#6938EF] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:pointer-events-auto [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#6938EF] [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-none"
+                    style={{ zIndex: "4" }}
+                  />
+                </div>
               </div>
 
               {/* Rating Inputs */}
@@ -128,7 +166,7 @@ const BusinessDashBoardFilter = () => {
                   <div className="flex-1 border border-[#E4E7EC] rounded-[8px] px-[8px] py-[12px] flex items-center justify-center gap-[16px]">
                     <Star className="w-4 h-4 text-gray-400" />
                     <span className="text-sm font-medium">
-                      {ratingMin.toFixed(1)}
+                      {minValue.toFixed(1)}
                     </span>
                   </div>
                 </div>
@@ -139,7 +177,7 @@ const BusinessDashBoardFilter = () => {
                   <div className="flex-1 border border-[#E4E7EC] rounded-[8px] px-[8px] py-[12px] flex items-center justify-center gap-[16px]">
                     <Star className="w-4 h-4 text-gray-400" />
                     <span className="text-sm font-medium">
-                      {ratingMax.toFixed(1)}
+                      {maxValue.toFixed(1)}
                     </span>
                   </div>
                 </div>

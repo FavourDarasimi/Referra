@@ -12,9 +12,11 @@ const Registration = () => {
           to select the ideal candidate.
         </h1>
         <div className="flex justify-between w-full gap-[47px]">
-          <button className="bg-[#F0EBFD] text-[#6938EF] border-[#6938EF] hover:border-[#6033D9] border-[1px] rounded-full w-full h-[56px] text-[14px]">
-            Login
-          </button>
+          <Link to="/business/signin" className="w-full">
+            <button className="bg-[#F0EBFD] text-[#6938EF] border-[#6938EF] hover:border-[#6033D9] border-[1px] rounded-full w-full h-[56px] text-[14px]">
+              Login
+            </button>
+          </Link>
           <Link to="/role" className="w-full">
             <button className="w-full bg-[#6938EF] text-white rounded-full  text-[14px] hover:bg-[#6033D9] transition-all duration-300 h-[56px] focus:border-[2px] focus:border-[#D1C1FA]">
               Get Started
