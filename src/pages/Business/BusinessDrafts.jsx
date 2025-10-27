@@ -8,6 +8,8 @@ import {
   Upload,
   X,
 } from "lucide-react";
+import { MdAdd } from "react-icons/md";
+import { HiOutlineDocument } from "react-icons/hi2";
 import Button from "../../components/Button";
 
 const BusinessDrafts = () => {
@@ -21,6 +23,7 @@ const BusinessDrafts = () => {
     { id: 2, title: "Template title", status: "Draft", updated: "2 days ago" },
     { id: 3, title: "Template title", status: "Draft", updated: "2 days ago" },
     { id: 4, title: "Template title", status: "Draft", updated: "2 days ago" },
+    { id: 4, title: "Template title", status: "Preset", updated: "2 days ago" },
   ]);
 
   const [drafts, setDrafts] = useState([
@@ -97,11 +100,11 @@ const BusinessDrafts = () => {
   };
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-[20px] flex flex-col h-full">
       {/* Templates Section */}
-      <section className="bg-white rounded-2xl p-[32px] space-y-[32px]">
+      <section className="bg-white rounded-[20px] p-[32px] space-y-[32px] ">
         <div className="flex justify-between items-center">
-          <h2 className="text-lg font-semibold text-gray-800">
+          <h2 className="text-lg font-medium text-[#667085]">
             Get started with templates – Quick ⚡
           </h2>
           <button
@@ -112,9 +115,9 @@ const BusinessDrafts = () => {
           </button>
         </div>
 
-        <div className="flex  gap-[32px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5  gap-[32px]">
           {templates.map((t) => (
-            <div className="space-y-[8px] relative w-[200px]">
+            <div className="space-y-[8px] relative">
               <div
                 key={t.id}
                 className="relative flex flex-col justify-center h-[194px] group rounded-xl p-4 bg-[#F2F4F7] hover:bg-[#E4E7EC] transition-all duration-300"
@@ -124,21 +127,24 @@ const BusinessDrafts = () => {
                   className={`absolute border-[1px] top-2 right-2 px-2 py-[2px] rounded-full text-xs font-medium ${
                     t.status === "Published"
                       ? "bg-[#D1FADF] text-[#027A48] border-[#12B76A]"
-                      : "bg-[#E4E7EC] text-[#344054] border-[#98A2B3]"
+                      : t.status === "Draft"
+                      ? "bg-[#E4E7EC] text-[#344054] border-[#98A2B3]"
+                      : "bg-[#F0EBFD] text-[#4B28AA] border-[#6938EF]"
                   }`}
                 >
                   {t.status}
                 </span>
 
                 {/* Open Template Button */}
-
-                <Button
-                  type="primary"
-                  handleSubmit={() => alert(`Opening template ${t.title}`)}
-                  title="Open template"
-                  size="mini"
-                  styles="group-hover:opacity-100 opacity-0 transition-all duration-300"
-                />
+                <div className="flex justify-center">
+                  <Button
+                    type="primary"
+                    handleSubmit={() => alert(`Opening template ${t.title}`)}
+                    title="Open template"
+                    size="mini"
+                    styles="group-hover:opacity-100 opacity-0 transition-all duration-300"
+                  />
+                </div>
 
                 {/* 3-Dot Menu */}
               </div>
@@ -202,93 +208,65 @@ const BusinessDrafts = () => {
       </section>
 
       {/* Drafts Section */}
-      <section className="bg-white rounded-2xl p-6 shadow-sm">
-        <div className="flex justify-between items-center mb-6">
+      <section className="bg-white rounded-[20px] p-[24px] space-y-[34px] flex flex-col flex-1">
+        <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold text-gray-800">Drafts</h2>
-          <button
-            onClick={handleCreateNew}
-            className="flex items-center gap-2 bg-[#6938EF] text-white px-4 py-2 rounded-full text-sm hover:bg-[#7b54f5]"
-          >
-            + Create new
-          </button>
-        </div>
 
+          <Button
+            type="primary"
+            handleSubmit={handleCreateNew}
+            title="Create new"
+            size="small"
+            styles=""
+            Icon={MdAdd}
+          />
+        </div>
         {drafts.length === 0 ? (
-          <div className="text-center text-gray-500 py-10">
-            <p>Start by creating your first reference form</p>
-            <p className="text-sm mt-1">Hit “create new” to get started.</p>
+          <div className="bg-[#F9FAFB] flex-1 rounded-[16px]">
+            <div className="flex flex-col justify-center space-y-[24px] items-center  h-full">
+              <div className="p-[20px] bg-[#F2F4F7] rounded-full">
+                <HiOutlineDocument className="w-[32px] h-[32px] text-[#F2F4F7] fill-[#D0D5DD]" />
+              </div>
+              <div className="space-y-[8px] text-center">
+                <p className="text-[16px]  text-[#344054]">
+                  Start by creating your first reference form
+                </p>
+                <p className="text-sm text-[#667085]">
+                  Hit “create new” to get started.
+                </p>
+              </div>
+            </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {drafts.map((d) => (
-              <div
-                key={d.id}
-                className="relative border border-gray-200 rounded-xl p-4 bg-gray-50 hover:bg-gray-100 transition-all"
-              >
-                {/* Status */}
-                <span
-                  className={`absolute top-2 right-2 px-2 py-[2px] rounded-full text-xs font-medium ${
-                    d.status === "Published"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-gray-100 text-gray-600"
-                  }`}
+              <div className="bg-[#F2F4F7] p-[12px] space-y-[12px] rounded-[18px]">
+                <div
+                  key={d.id}
+                  className="relative flex flex-col justify-center h-[234px] group rounded-xl p-4 bg-[#F9FAFB] hover:bg-[#E4E7EC] transition-all duration-300"
                 >
-                  {d.status}
-                </span>
-
-                <p className="text-sm font-medium text-gray-800 mt-8">
-                  {d.title}
-                </p>
-                <p className="text-xs text-gray-500">
-                  Last updated {d.updated}
-                </p>
-
-                {/* Menu */}
-                <div className="absolute bottom-3 right-3">
-                  <button
-                    onClick={() => handleMenuToggle(`draft-${d.id}`)}
-                    className="text-gray-400 hover:text-gray-600"
+                  {/* Status */}
+                  <span
+                    className={`absolute top-2 right-2 px-2 py-[2px] rounded-full border text-xs font-medium ${
+                      d.status === "Published"
+                        ? "bg-[#D1FADF] text-[#027A48] border-[#12B76A]"
+                        : d.status === "Draft"
+                        ? "bg-[#E4E7EC] text-[#344054] border-[#98A2B3]"
+                        : "bg-[#F0EBFD] text-[#4B28AA] border-[#6938EF]"
+                    }`}
                   >
-                    <MoreVertical size={18} />
-                  </button>
+                    {d.status}
+                  </span>
 
-                  {openMenu === `draft-${d.id}` && (
-                    <div className="absolute right-0 mt-2 w-36 bg-white border border-gray-100 shadow-lg rounded-lg z-50">
-                      <ul className="text-sm text-gray-700">
-                        <li
-                          className="px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center gap-2"
-                          onClick={() => handleEdit(d.id, "draft")}
-                        >
-                          <Edit size={14} /> Edit
-                        </li>
-                        <li
-                          className="px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center gap-2"
-                          onClick={() => handleClone(d.id, "draft")}
-                        >
-                          <Copy size={14} /> Clone
-                        </li>
-                        <li
-                          className="px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center gap-2"
-                          onClick={() => handleRename(d.id, "draft")}
-                        >
-                          <Upload size={14} /> Rename
-                        </li>
-                        <li
-                          className="px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center gap-2"
-                          onClick={() => handleTogglePublish(d.id, "draft")}
-                        >
-                          <Globe size={14} />{" "}
-                          {d.status === "Published" ? "Unpublish" : "Publish"}
-                        </li>
-                        <li
-                          className="px-4 py-2 hover:bg-gray-50 text-red-500 cursor-pointer flex items-center gap-2 border-t border-gray-100"
-                          onClick={() => handleDelete(d.id, "draft")}
-                        >
-                          <Trash size={14} /> Delete
-                        </li>
-                      </ul>
-                    </div>
-                  )}
+                  {/* Menu */}
+                </div>
+                <div className="space-y-[4px]">
+                  <p className="text-[16px] font-medium text-[#475467]">
+                    {d.title}
+                  </p>
+                  <p className="text-xs text-[#98A2B3]">
+                    Last updated {d.updated}
+                  </p>
                 </div>
               </div>
             ))}

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Button = ({
-  full,
+  full = false,
   Icon = null,
   IconRight = null,
   type,
@@ -35,7 +35,7 @@ const Button = ({
     <button
       type="submit"
       onClick={(e) => handleSubmit(e)}
-      className={`${full ? "w-full" : ""} ${styles} ${
+      className={`${full ? "w-full" : "w-fit"} ${styles} ${
         defaultStyles[type]
       }   rounded-full    transition-all duration-300 ${
         sizeClasses[size]
