@@ -17,6 +17,9 @@ import ResetPasswordOTPVerification from "./pages/Business/ResetPasswordOTPVerif
 import ResetPasswordForm from "./pages/Business/ResetPasswordForm";
 import ResetPasswordSuccess from "./pages/Business/ResetPasswordSuccess";
 import BusinessDashbord from "./pages/Business/BusinessDashbord";
+import BusinessDrafts from "./pages/Business/BusinessDrafts";
+import AuthLayout from "./layouts/AuthLayout";
+import BusinessLayout from "./layouts/BusinessLayout";
 
 function App() {
   const { toasts, removeToast } = useContext(Context);
@@ -34,34 +37,41 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<Registration />} />
-        <Route path="/role" element={<RoleSelection />} />
 
-        {/* Business Routes */}
-        <Route path="/business/signup" element={<BusinessSignUp />} />
-        <Route path="/business/signin" element={<BusinessLogin />} />
-        <Route
-          path="/business/signup/otp/verification"
-          element={<OTPVerification />}
-        />
-        <Route path="/business/profile" element={<BusinessProfile />} />
-        <Route
-          path="/business/profile/image"
-          element={<BusinessProfileImage />}
-        />
-        <Route path="/business/forgot-password" element={<ResetPassword />} />
-        <Route
-          path="/business/forgot-password/password-reset"
-          element={<ResetPasswordForm />}
-        />
-        <Route
-          path="/business/forgot-password/success"
-          element={<ResetPasswordSuccess />}
-        />
-        <Route
-          path="/business/forgot-password/otp/verification"
-          element={<ResetPasswordOTPVerification />}
-        />
-        <Route path="/business/dashboard" element={<BusinessDashbord />} />
+        <Route element={<AuthLayout />}>
+          <Route path="/role" element={<RoleSelection />} />
+
+          {/* Business Routes */}
+          <Route path="/business/signup" element={<BusinessSignUp />} />
+          <Route path="/business/signin" element={<BusinessLogin />} />
+          <Route
+            path="/business/signup/otp/verification"
+            element={<OTPVerification />}
+          />
+          <Route path="/business/profile" element={<BusinessProfile />} />
+          <Route
+            path="/business/profile/image"
+            element={<BusinessProfileImage />}
+          />
+          <Route path="/business/forgot-password" element={<ResetPassword />} />
+          <Route
+            path="/business/forgot-password/password-reset"
+            element={<ResetPasswordForm />}
+          />
+          <Route
+            path="/business/forgot-password/success"
+            element={<ResetPasswordSuccess />}
+          />
+          <Route
+            path="/business/forgot-password/otp/verification"
+            element={<ResetPasswordOTPVerification />}
+          />
+        </Route>
+
+        <Route element={<BusinessLayout />}>
+          <Route path="/business/dashboard" element={<BusinessDashbord />} />
+          <Route path="/business/drafts" element={<BusinessDrafts />} />
+        </Route>
 
         {/* Individual Routes */}
         <Route path="/individual/signin" element={<IndividualLogin />} />

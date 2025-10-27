@@ -4,8 +4,11 @@ import { MdDrafts, MdPublish } from "react-icons/md";
 import { FaFileAlt, FaComments } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 
 const BusinessSideBar = ({ activeNav, setActiveNav }) => {
+  // Inside the component:
+  const navigate = useNavigate();
   const topNavItems = [
     { name: "Overview", icon: GrOverview },
     { name: "Drafts", icon: MdDrafts },
@@ -19,8 +22,14 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     { name: "Settings", icon: IoSettingsSharp },
     { name: "Help & support", icon: HiOutlineQuestionMarkCircle },
   ];
+
+  const handleClick = (item) => {
+    setActiveNav(item.name);
+    if (item.name === "Drafts") navigate("/business/drafts");
+    if (item.name === "Overview") navigate("/business/dashboard");
+  };
   return (
-    <div className="w-[240px]   flex flex-col">
+    <div className="w-[240px] mt-[20px]  flex flex-col">
       {/* Logo */}
 
       {/* Navigation Items */}
@@ -32,7 +41,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
             return (
               <button
                 key={item.name}
-                onClick={() => setActiveNav(item.name)}
+                onClick={() => handleClick(item)}
                 className={`w-full flex items-center gap-[15px] px-[20px] py-[12px] rounded-full transition-all ${
                   isActive ? "bg-[#F0EBFD]  text-[#6938EF]" : "text-[#667085] "
                 }`}

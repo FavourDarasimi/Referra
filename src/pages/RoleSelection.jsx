@@ -34,31 +34,26 @@ const RoleSelection = () => {
     }
   };
   return (
-    <div className="flex flex-col h-screen">
-      <AuthNavbar selectedRole={selectedRole} />
-      <div className="w-[480px] flex flex-col justify-center mx-auto flex-1 p-[32px] gap-[40px]">
-        <h1 className="font-bold text-[24px]">
-          How do you want to use referra?
-        </h1>
-        <div className="space-y-[20px]">
-          {roles.map((role, index) => (
-            <RoleCard
-              key={index}
-              Icon={role.icon}
-              title={role.title}
-              description={role.description}
-              selectedRole={selectedRole}
-              setSelectedRole={setSelectedRole}
-            />
-          ))}
-        </div>
-        <button
-          onClick={handleContinue}
-          className="w-full bg-[#6938EF] text-white rounded-full  text-[14px] hover:bg-[#6033D9] transition-all duration-300 h-[56px] focus:border-[2px] focus:border-[#D1C1FA]"
-        >
-          Continue
-        </button>
+    <div className="w-[480px]  p-[32px] space-y-[40px]">
+      <h1 className="font-bold text-[24px]">How do you want to use referra?</h1>
+      <div className="space-y-[20px]">
+        {roles.map((role, index) => (
+          <RoleCard
+            key={index}
+            Icon={role.icon}
+            title={role.title}
+            description={role.description}
+            selectedRole={selectedRole}
+            setSelectedRole={setSelectedRole}
+          />
+        ))}
       </div>
+      <button
+        onClick={handleContinue}
+        className="w-full bg-[#6938EF] text-white rounded-full  text-[14px] hover:bg-[#6033D9] transition-all duration-300 h-[56px] focus:border-[2px] focus:border-[#D1C1FA]"
+      >
+        Continue
+      </button>
     </div>
   );
 };

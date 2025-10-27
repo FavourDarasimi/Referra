@@ -2,7 +2,7 @@ import Brand from "../assets/Brand.png";
 import { Link, useLocation } from "react-router-dom";
 import Button from "./Button";
 
-const AuthNavbar = ({ selectedRole }) => {
+const AuthNavbar = () => {
   const location = useLocation();
   const path = location.pathname;
 
