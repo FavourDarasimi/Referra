@@ -1,10 +1,10 @@
 import { useState } from "react";
 import BusinessSideBar from "../components/BusinessSideBar";
 import BusinessTopBar from "../components/BusinessTopBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const BusinessLayout = () => {
-  const [activeNav, setActiveNav] = useState("Overview");
+  const [activeNav, setActiveNav] = useState();
 
   return (
     <div className="flex flex-col h-screen bg-white">

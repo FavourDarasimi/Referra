@@ -4,11 +4,19 @@ import { MdDrafts, MdPublish } from "react-icons/md";
 import { FaFileAlt, FaComments } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const BusinessSideBar = ({ activeNav, setActiveNav }) => {
   // Inside the component:
   const navigate = useNavigate();
+  const location = useLocation();
+  const path = location.pathname;
+
+  if (path.includes("/overview")) {
+    setActiveNav("Overview");
+  } else if (path.includes("/drafts")) {
+    setActiveNav("Drafts");
+  }
   const topNavItems = [
     { name: "Overview", icon: GrOverview },
     { name: "Drafts", icon: MdDrafts },
@@ -26,7 +34,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
   const handleClick = (item) => {
     setActiveNav(item.name);
     if (item.name === "Drafts") navigate("/business/drafts");
-    if (item.name === "Overview") navigate("/business/dashboard");
+    if (item.name === "Overview") navigate("/business/overview");
   };
   return (
     <div className="w-[240px] mt-[20px]  flex flex-col">

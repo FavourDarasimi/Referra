@@ -11,6 +11,8 @@ import {
 import { MdAdd } from "react-icons/md";
 import { HiOutlineDocument } from "react-icons/hi2";
 import Button from "../../components/Button";
+import DeleteTemplate from "../../components/DeleteTemplate"; // Import the modal
+import RenameTemplate from "../../components/RenameTemplate"; // Import the modal
 
 const BusinessDrafts = () => {
   const [templates, setTemplates] = useState([
@@ -23,7 +25,7 @@ const BusinessDrafts = () => {
     { id: 2, title: "Template title", status: "Draft", updated: "2 days ago" },
     { id: 3, title: "Template title", status: "Draft", updated: "2 days ago" },
     { id: 4, title: "Template title", status: "Draft", updated: "2 days ago" },
-    { id: 4, title: "Template title", status: "Preset", updated: "2 days ago" },
+    { id: 5, title: "Template title", status: "Preset", updated: "2 days ago" },
   ]);
 
   const [drafts, setDrafts] = useState([
@@ -42,6 +44,30 @@ const BusinessDrafts = () => {
   ]);
 
   const [openMenu, setOpenMenu] = useState(null);
+  const [deleteTemplate, setDeleteTemplate] = useState({
+    isOpen: false,
+    type: null, // 'template' or 'draft'
+    id: null,
+  });
+
+  const [renameModal, setRenameModal] = useState({
+    isOpen: false,
+    type: null, // 'template' or 'draft'
+    id: null,
+    currentTitle: "",
+  });
+
+  const handleConfirmRename = (newTitle) => {
+    const { type, id } = renameModal;
+    const setter = type === "template" ? setTemplates : setDrafts;
+    const list = type === "template" ? templates : drafts;
+    setter(list.map((t) => (t.id === id ? { ...t, title: newTitle } : t)));
+    setRenameModal({ isOpen: false, type: null, id: null, currentTitle: "" });
+  };
+
+  const handleCancelRename = () => {
+    setRenameModal({ isOpen: false, type: null, id: null, currentTitle: "" });
+  };
 
   // Handlers
   const handleMenuToggle = (id) => {
@@ -58,20 +84,40 @@ const BusinessDrafts = () => {
     const item = sourceList.find((t) => t.id === id);
     const newItem = { ...item, id: Date.now(), title: `${item.title} (Copy)` };
     setter([...sourceList, newItem]);
+    setOpenMenu(null);
   };
 
   const handleRename = (id, type) => {
-    const newTitle = prompt("Enter new name:");
-    if (!newTitle) return;
-    const setter = type === "template" ? setTemplates : setDrafts;
     const list = type === "template" ? templates : drafts;
-    setter(list.map((t) => (t.id === id ? { ...t, title: newTitle } : t)));
+    const item = list.find((t) => t.id === id);
+    setRenameModal({
+      isOpen: true,
+      type: type,
+      id: id,
+      currentTitle: item?.title || "",
+    });
+    setOpenMenu(null);
   };
 
-  const handleDelete = (id, type) => {
+  const handleDeleteClick = (id, type) => {
+    setDeleteTemplate({
+      isOpen: true,
+      type: type,
+      id: id,
+    });
+    setOpenMenu(null);
+  };
+
+  const handleConfirmDelete = () => {
+    const { type, id } = deleteTemplate;
     const setter = type === "template" ? setTemplates : setDrafts;
     const list = type === "template" ? templates : drafts;
     setter(list.filter((t) => t.id !== id));
+    setDeleteTemplate({ isOpen: false, type: null, id: null });
+  };
+
+  const handleCancelDelete = () => {
+    setDeleteTemplate({ isOpen: false, type: null, id: null });
   };
 
   const handleTogglePublish = (id, type) => {
@@ -87,6 +133,7 @@ const BusinessDrafts = () => {
           : t
       )
     );
+    setOpenMenu(null);
   };
 
   const handleCreateNew = () => {
@@ -101,6 +148,20 @@ const BusinessDrafts = () => {
 
   return (
     <div className="space-y-[20px] flex flex-col h-full">
+      {/* Delete Modal */}
+      <DeleteTemplate
+        isOpen={deleteTemplate.isOpen}
+        title={deleteTemplate.type === "template" ? "Template" : "Draft"}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
+      <RenameTemplate
+        isOpen={renameModal.isOpen}
+        currentTitle={renameModal.currentTitle}
+        onConfirm={handleConfirmRename}
+        onCancel={handleCancelRename}
+      />
+
       {/* Templates Section */}
       <section className="bg-white rounded-[20px] p-[32px] space-y-[32px] ">
         <div className="flex justify-between items-center">
@@ -117,11 +178,8 @@ const BusinessDrafts = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5  gap-[32px]">
           {templates.map((t) => (
-            <div className="space-y-[8px] relative">
-              <div
-                key={t.id}
-                className="relative flex flex-col justify-center h-[194px] group rounded-xl p-4 bg-[#F2F4F7] hover:bg-[#E4E7EC] transition-all duration-300"
-              >
+            <div key={t.id} className="space-y-[8px] relative">
+              <div className="relative flex flex-col justify-center h-[194px] group rounded-xl p-4 bg-[#F2F4F7] hover:bg-[#E4E7EC] transition-all duration-300">
                 {/* Status Badge */}
                 <span
                   className={`absolute border-[1px] top-2 right-2 px-2 py-[2px] rounded-full text-xs font-medium ${
@@ -145,8 +203,6 @@ const BusinessDrafts = () => {
                     styles="group-hover:opacity-100 opacity-0 transition-all duration-300"
                   />
                 </div>
-
-                {/* 3-Dot Menu */}
               </div>
               <div className="flex justify-between p-[4px]">
                 <div className="">
@@ -155,7 +211,7 @@ const BusinessDrafts = () => {
                     Last updated {t.updated}
                   </p>
                 </div>
-                <div className="">
+                <div className="relative">
                   <button
                     onClick={() => handleMenuToggle(`template-${t.id}`)}
                     className="text-gray-400 hover:text-gray-600"
@@ -193,7 +249,7 @@ const BusinessDrafts = () => {
                         </li>
                         <li
                           className="px-4 py-2 hover:bg-gray-50 text-red-500 cursor-pointer flex items-center gap-2 border-t border-gray-100"
-                          onClick={() => handleDelete(t.id, "template")}
+                          onClick={() => handleDeleteClick(t.id, "template")}
                         >
                           <Trash size={14} /> Delete
                         </li>
@@ -232,7 +288,7 @@ const BusinessDrafts = () => {
                   Start by creating your first reference form
                 </p>
                 <p className="text-sm text-[#667085]">
-                  Hit “create new” to get started.
+                  Hit "create new" to get started.
                 </p>
               </div>
             </div>
@@ -240,11 +296,11 @@ const BusinessDrafts = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {drafts.map((d) => (
-              <div className="bg-[#F2F4F7] p-[12px] space-y-[12px] rounded-[18px]">
-                <div
-                  key={d.id}
-                  className="relative flex flex-col justify-center h-[234px] group rounded-xl p-4 bg-[#F9FAFB] hover:bg-[#E4E7EC] transition-all duration-300"
-                >
+              <div
+                key={d.id}
+                className="bg-[#F2F4F7] p-[12px] space-y-[12px] rounded-[18px]"
+              >
+                <div className="relative flex flex-col justify-center h-[234px] group rounded-xl p-4 bg-[#F9FAFB] hover:bg-[#E4E7EC] transition-all duration-300">
                   {/* Status */}
                   <span
                     className={`absolute top-2 right-2 px-2 py-[2px] rounded-full border text-xs font-medium ${
@@ -257,8 +313,6 @@ const BusinessDrafts = () => {
                   >
                     {d.status}
                   </span>
-
-                  {/* Menu */}
                 </div>
                 <div className="space-y-[4px]">
                   <p className="text-[16px] font-medium text-[#475467]">

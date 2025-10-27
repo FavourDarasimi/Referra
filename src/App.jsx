@@ -69,7 +69,7 @@ function App() {
         </Route>
 
         <Route element={<BusinessLayout />}>
-          <Route path="/business/dashboard" element={<BusinessDashbord />} />
+          <Route path="/business/overview" element={<BusinessDashbord />} />
           <Route path="/business/drafts" element={<BusinessDrafts />} />
         </Route>
 

@@ -50,7 +50,7 @@ const AuthNavbar = () => {
       {pageType === "signin" ? (
         <div className="flex gap-[8px] items-center">
           <h1 className="text-[14px] text-[#667085]">Don't have an account?</h1>
-          <Link to="/business/signup">
+          <Link to="/role">
             <Button
               type="primaryLight"
               full={false}
