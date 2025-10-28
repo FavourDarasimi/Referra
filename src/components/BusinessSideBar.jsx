@@ -35,6 +35,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     setActiveNav(item.name);
     if (item.name === "Drafts") navigate("/business/drafts");
     if (item.name === "Overview") navigate("/business/overview");
+    if (item.name === "Templates") navigate("/business/templates");
   };
   return (
     <div className="w-[240px] mt-[20px]  flex flex-col">

@@ -43,7 +43,7 @@ const BusinessLogin = () => {
     } else {
       addToast("secondary", "Logged in successfully", "success");
       setError({});
-      navigate("/business/dashboard");
+      navigate("/business/overview");
     }
   };
 

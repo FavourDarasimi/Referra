@@ -11,8 +11,8 @@ import {
 import { MdAdd } from "react-icons/md";
 import { HiOutlineDocument } from "react-icons/hi2";
 import Button from "../../components/Button";
-import DeleteTemplate from "../../components/DeleteTemplate"; // Import the modal
-import RenameTemplate from "../../components/RenameTemplate"; // Import the modal
+import DeleteTemplate from "../../components/DeleteTemplate";
+import RenameTemplate from "../../components/RenameTemplate";
 
 const BusinessDrafts = () => {
   const [templates, setTemplates] = useState([
@@ -44,6 +44,7 @@ const BusinessDrafts = () => {
   ]);
 
   const [openMenu, setOpenMenu] = useState(null);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [deleteTemplate, setDeleteTemplate] = useState({
     isOpen: false,
     type: null, // 'template' or 'draft'

@@ -18,6 +18,7 @@ import ResetPasswordForm from "./pages/Business/ResetPasswordForm";
 import ResetPasswordSuccess from "./pages/Business/ResetPasswordSuccess";
 import BusinessDashbord from "./pages/Business/BusinessDashbord";
 import BusinessDrafts from "./pages/Business/BusinessDrafts";
+import BusinessTemplates from "./pages/Business/BusinessTemplates";
 import AuthLayout from "./layouts/AuthLayout";
 import BusinessLayout from "./layouts/BusinessLayout";
 
@@ -71,6 +72,7 @@ function App() {
         <Route element={<BusinessLayout />}>
           <Route path="/business/overview" element={<BusinessDashbord />} />
           <Route path="/business/drafts" element={<BusinessDrafts />} />
+          <Route path="/business/templates" element={<BusinessTemplates />} />
         </Route>
 
         {/* Individual Routes */}
