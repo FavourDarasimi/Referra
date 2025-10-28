@@ -7,16 +7,19 @@ import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const BusinessSideBar = ({ activeNav, setActiveNav }) => {
-  // Inside the component:
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
+  const isFormBuilder = path.includes("/form-builder");
 
   if (path.includes("/overview")) {
     setActiveNav("Overview");
   } else if (path.includes("/drafts")) {
     setActiveNav("Drafts");
+  } else if (path.includes("/templates") || path.includes("/form-builder")) {
+    setActiveNav("Templates");
   }
+
   const topNavItems = [
     { name: "Overview", icon: GrOverview },
     { name: "Drafts", icon: MdDrafts },
@@ -37,12 +40,56 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     if (item.name === "Overview") navigate("/business/overview");
     if (item.name === "Templates") navigate("/business/templates");
   };
-  return (
-    <div className="w-[240px] mt-[20px]  flex flex-col">
-      {/* Logo */}
 
-      {/* Navigation Items */}
-      <nav className="flex-1 space-y-[24px]  py-[20px]">
+  if (isFormBuilder) {
+    return (
+      <div className="flex flex-col items-center  gap-[24px] mt-[20px]">
+        <div className="flex flex-col gap-[8px] py-[20px]">
+          {topNavItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeNav === item.name;
+            return (
+              <button
+                key={item.name}
+                onClick={() => handleClick(item)}
+                className={`py-[12px] px-[20px] rounded-full transition-all duration-300 flex items-center justify-center ${
+                  isActive ? "bg-[#F0EBFD] text-[#6938EF]" : "text-[#667085] "
+                }`}
+                title={item.name}
+              >
+                <Icon className="w-[20px] h-[20px]" />
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="w-[20px] h-px bg-[#E4E7EC]"></div>
+
+        <div className="flex flex-col gap-[8px] mt-auto">
+          {bottomNavItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeNav === item.name;
+            return (
+              <button
+                key={item.name}
+                onClick={() => setActiveNav(item.name)}
+                className={`py-[12px] px-[20px] rounded-full transition-all duration-300 flex items-center justify-center ${
+                  isActive ? "bg-[#F0EBFD] text-[#6938EF]" : "text-[#667085] "
+                }`}
+                title={item.name}
+              >
+                <Icon className="w-[24px] h-[24px]" />
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-[240px] mt-[20px] flex flex-col">
+      <nav className="flex-1 space-y-[24px] py-[20px]">
         <div className="space-y-[8px]">
           {topNavItems.map((item) => {
             const Icon = item.icon;
@@ -52,7 +99,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
                 key={item.name}
                 onClick={() => handleClick(item)}
                 className={`w-full flex items-center gap-[15px] px-[20px] py-[12px] rounded-full transition-all ${
-                  isActive ? "bg-[#F0EBFD]  text-[#6938EF]" : "text-[#667085] "
+                  isActive ? "bg-[#F0EBFD] text-[#6938EF]" : "text-[#667085]"
                 }`}
               >
                 <Icon className="w-[17px] h-[20px]" />
@@ -78,7 +125,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
                 key={item.name}
                 onClick={() => setActiveNav(item.name)}
                 className={`w-full flex items-center gap-[15px] px-[20px] py-[12px] rounded-full transition-all ${
-                  isActive ? "bg-[#F0EBFD]  text-[#6938EF]" : "text-[#667085] "
+                  isActive ? "bg-[#F0EBFD] text-[#6938EF]" : "text-[#667085]"
                 }`}
               >
                 <Icon className="w-[17px] h-[20px]" />

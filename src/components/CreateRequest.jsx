@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { X, ChevronDown } from "lucide-react";
 import { FaArrowRight } from "react-icons/fa6";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 const CreateRequest = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     recipientEmail: "",
     candidateName: "",
@@ -21,7 +23,7 @@ const CreateRequest = ({ isOpen, onClose }) => {
   };
 
   const handleContinue = () => {
-    console.log("Form Data:", formData);
+    navigate("/business/form-builder");
     // Add API call here
   };
 
@@ -141,6 +143,7 @@ const CreateRequest = ({ isOpen, onClose }) => {
             title="Continue"
             Icon={FaArrowRight}
             IconRight={true}
+            handleSubmit={handleContinue}
           />
         </div>
       </div>
