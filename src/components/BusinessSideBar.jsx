@@ -22,6 +22,8 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     setActiveNav("Published");
   } else if (path.includes("/responses")) {
     setActiveNav("Responses");
+  } else if (path.includes("/billing")) {
+    setActiveNav("Billing");
   }
 
   const topNavItems = [
@@ -45,6 +47,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     if (item.name === "Templates") navigate("/business/templates");
     if (item.name === "Published") navigate("/business/published");
     if (item.name === "Responses") navigate("/business/responses");
+    if (item.name === "Billing") navigate("/business/billing");
   };
 
   if (isFormBuilder) {
@@ -94,7 +97,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
   }
 
   return (
-    <div className="w-[240px] mt-[20px] flex flex-col">
+    <div className="w-[240px] mt-[20px] flex flex-col pl-[20px]">
       <nav className="flex-1 space-y-[24px] py-[20px]">
         <div className="space-y-[8px]">
           {topNavItems.map((item) => {

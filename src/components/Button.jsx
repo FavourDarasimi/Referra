@@ -30,6 +30,7 @@ const Button = ({
       "bg-[#6938EF] hover:bg-[#6033D9] focus:border-[#D1C1FA] text-white",
     primaryLight: "bg-[#F0EBFD] ] border-[1px] border-[#6938EF] text-[#6938EF]",
     neutralOutline: "border-[1px] border-[#E4E7EC] text-[#667085]",
+    red: "bg-[#F04438] text-white",
   };
   return (
     <button

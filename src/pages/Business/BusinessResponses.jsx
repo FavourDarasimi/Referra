@@ -89,7 +89,7 @@ const BusinessResponses = () => {
               <th className="px-6 py-[12px] text-left">
                 <input
                   type="checkbox"
-                  className="w-4 h-4 border-[#D0D5DD] rounded"
+                  className="w-4 h-4 border-[#D0D3D9] rounded"
                 />
               </th>
               <th className="px-6 py-[12px] text-left text-xs font-semibold text-[#667085]">
@@ -118,7 +118,7 @@ const BusinessResponses = () => {
                 <td className="px-6 py-4">
                   <input
                     type="checkbox"
-                    className="w-4 h-4 border-[#D0D5DD] rounded"
+                    className="w-4 h-4 border-[#D0D3D9] rounded"
                   />
                 </td>
                 <td className="px-6 py-4 text-sm font-medium text-[#344054]">
