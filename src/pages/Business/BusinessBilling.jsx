@@ -12,31 +12,13 @@ import { FaCheckCircle } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import { Trash2, Check } from "lucide-react";
 import DeleteCard from "../../components/DeleteCard";
+import AddPaymentCard from "../../components/AddPaymentCard";
 
 const BusinessBilling = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [cardToDelete, setCardToDelete] = useState(null);
-  const [paymentCards, setPaymentCards] = useState([
-    {
-      id: 1,
-      type: "visa",
-      cardName: "Visa Card",
-      holderName: "John Doe",
-      lastFour: "4242",
-      expiryDate: "2025/10/20",
-      isDefault: true,
-    },
-    {
-      id: 2,
-      type: "mastercard",
-      cardName: "Mastercard",
-      holderName: "Jane Smith",
-      lastFour: "5555",
-      expiryDate: "2026/05/15",
-      isDefault: false,
-    },
-  ]);
+  const [paymentCards, setPaymentCards] = useState([]);
 
   const [formData, setFormData] = useState({
     cardholderName: "",
@@ -111,34 +93,26 @@ const BusinessBilling = () => {
     return "bg-[#F2F4F7] text-[#667085]";
   };
 
-  const handleAddCard = () => {
-    if (
-      formData.cardholderName &&
-      formData.cardNumber &&
-      formData.expiryDate &&
-      formData.cvv
-    ) {
-      const lastFour = formData.cardNumber.slice(-4);
-      setPaymentCards([
-        ...paymentCards,
-        {
-          id: paymentCards.length + 1,
-          type: "visa",
-          cardName: "Visa Card",
-          holderName: formData.cardholderName,
-          lastFour: lastFour,
-          expiryDate: formData.expiryDate,
-          isDefault: false,
-        },
-      ]);
-      setFormData({
-        cardholderName: "",
-        cardNumber: "",
-        expiryDate: "",
-        cvv: "",
-      });
-      setShowPaymentModal(false);
-    }
+  const handleAddCard = (data) => {
+    const lastFour = data.cardNumber.slice(-4);
+    const defaultCard = paymentCards.length === 0 ? true : false;
+    setPaymentCards([
+      ...paymentCards,
+      {
+        id: paymentCards.length + 1,
+        type: data.paymentMethod || "visa",
+        cardName: data.paymentMethod
+          ? `${
+              data.paymentMethod.charAt(0).toUpperCase() +
+              data.paymentMethod.slice(1)
+            } Card`
+          : "Visa Card",
+        holderName: data.cardHolderName,
+        lastFour,
+        expiryDate: data.expiryDate,
+        isDefault: defaultCard,
+      },
+    ]);
   };
 
   const setDefaultCard = (id) => {
@@ -194,6 +168,12 @@ const BusinessBilling = () => {
           card={cardToDelete}
           onClose={() => setCardToDelete(null)}
           onConfirm={handleDelete}
+        />
+      )}
+      {showPaymentModal && (
+        <AddPaymentCard
+          onClose={() => setShowPaymentModal(false)}
+          onAddCard={handleAddCard}
         />
       )}
       {/* Header */}
