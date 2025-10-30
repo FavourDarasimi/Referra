@@ -37,7 +37,7 @@ const Button = ({
       onClick={(e) => handleSubmit(e)}
       className={`${full ? "w-full" : "w-fit"} ${styles} ${
         defaultStyles[type]
-      }   rounded-full    transition-all duration-300 ${
+      }   rounded-full   transition-all duration-300 ${
         sizeClasses[size]
       }  cursor-pointer flex justify-center items-center gap-[4px]`}
       disabled={disabled}

@@ -22,6 +22,7 @@ import BusinessTemplates from "./pages/Business/BusinessTemplates";
 import BusinessFormBuilder from "./pages/Business/BusinessFormBuilder";
 import AuthLayout from "./layouts/AuthLayout";
 import BusinessLayout from "./layouts/BusinessLayout";
+import BusinessPublished from "./pages/Business/BusinessPublished";
 
 function App() {
   const { toasts, removeToast } = useContext(Context);
@@ -78,6 +79,7 @@ function App() {
             path="/business/form-builder"
             element={<BusinessFormBuilder />}
           />
+          <Route path="/business/published" element={<BusinessPublished />} />
         </Route>
 
         {/* Individual Routes */}

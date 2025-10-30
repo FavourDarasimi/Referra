@@ -18,6 +18,8 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     setActiveNav("Drafts");
   } else if (path.includes("/templates") || path.includes("/form-builder")) {
     setActiveNav("Templates");
+  } else if (path.includes("/published")) {
+    setActiveNav("Published");
   }
 
   const topNavItems = [
@@ -39,6 +41,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     if (item.name === "Drafts") navigate("/business/drafts");
     if (item.name === "Overview") navigate("/business/overview");
     if (item.name === "Templates") navigate("/business/templates");
+    if (item.name === "Published") navigate("/business/published");
   };
 
   if (isFormBuilder) {
