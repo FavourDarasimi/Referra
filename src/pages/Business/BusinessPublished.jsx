@@ -272,7 +272,7 @@ const BusinessPublished = () => {
                 className={`p-2 rounded-full transition-colors ${
                   viewMode === "grid"
                     ? "bg-[#F0EBFD] border border-[#6938EF] text-[#6938EF] rounded-full"
-                    : "border border-[#E4E7EC] text-[#98A2B3] rounded-full"
+                    : "border border-[#F0F1F3] text-[#98A2B3] rounded-full"
                 }`}
               >
                 <Grid3x3 className="w-5 h-5" />
@@ -282,7 +282,7 @@ const BusinessPublished = () => {
                 className={`p-2 rounded-full transition-colors ${
                   viewMode === "list"
                     ? "bg-[#F0EBFD] border border-[#6938EF] text-[#6938EF] rounded-full"
-                    : "border border-[#E4E7EC] text-[#98A2B3] rounded-full"
+                    : "border border-[#F0F1F3] text-[#98A2B3] rounded-full"
                 }`}
               >
                 <List className="w-5 h-5" />
@@ -321,14 +321,14 @@ const BusinessPublished = () => {
             </div>
           ) : (
             /* List View */
-            <div className="bg-white rounded-[16px] border border-[#E4E7EC] overflow-hidden mb-8">
+            <div className="bg-white rounded-[16px] border border-[#F0F1F3] overflow-hidden mb-8">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-[#E4E7EC]">
+                  <tr className="border-b border-[#F0F1F3]">
                     <th className="px-6 py-4 text-left">
                       <input
                         type="checkbox"
-                        className="w-4 h-4 rounded border-[#E4E7EC]"
+                        className="w-4 h-4 rounded border-[#F0F1F3]"
                       />
                     </th>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-[#667085]">
@@ -352,12 +352,12 @@ const BusinessPublished = () => {
                   {paginatedForms.map((form) => (
                     <tr
                       key={form.id}
-                      className="border-b border-[#E4E7EC] hover:bg-[#F9FAFB] transition-colors"
+                      className="border-b border-[#F0F1F3] hover:bg-[#F9FAFB] transition-colors"
                     >
                       <td className="px-6 py-4">
                         <input
                           type="checkbox"
-                          className="w-4 h-4 rounded border-[#E4E7EC]"
+                          className="w-4 h-4 rounded border-[#F0F1F3]"
                         />
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-[#344054]">
@@ -443,7 +443,7 @@ const BusinessPublished = () => {
                       onClick={() => setCurrentPage(page)}
                       className={`w-8 h-8 rounded text-sm font-medium transition-colors ${
                         currentPage === page
-                          ? "bg-white border border-[#E4E7EC] text-[#344054]"
+                          ? "bg-white border border-[#F0F1F3] text-[#344054]"
                           : "text-[#667085] hover:bg-[#F2F4F7]"
                       }`}
                     >

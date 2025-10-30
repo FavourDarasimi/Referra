@@ -23,6 +23,7 @@ import BusinessFormBuilder from "./pages/Business/BusinessFormBuilder";
 import AuthLayout from "./layouts/AuthLayout";
 import BusinessLayout from "./layouts/BusinessLayout";
 import BusinessPublished from "./pages/Business/BusinessPublished";
+import BusinessResponses from "./pages/Business/BusinessResponses";
 
 function App() {
   const { toasts, removeToast } = useContext(Context);
@@ -80,6 +81,7 @@ function App() {
             element={<BusinessFormBuilder />}
           />
           <Route path="/business/published" element={<BusinessPublished />} />
+          <Route path="/business/responses" element={<BusinessResponses />} />
         </Route>
 
         {/* Individual Routes */}

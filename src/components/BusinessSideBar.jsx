@@ -20,6 +20,8 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     setActiveNav("Templates");
   } else if (path.includes("/published")) {
     setActiveNav("Published");
+  } else if (path.includes("/responses")) {
+    setActiveNav("Responses");
   }
 
   const topNavItems = [
@@ -42,6 +44,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     if (item.name === "Overview") navigate("/business/overview");
     if (item.name === "Templates") navigate("/business/templates");
     if (item.name === "Published") navigate("/business/published");
+    if (item.name === "Responses") navigate("/business/responses");
   };
 
   if (isFormBuilder) {
