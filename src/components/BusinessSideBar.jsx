@@ -24,6 +24,8 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     setActiveNav("Responses");
   } else if (path.includes("/billing")) {
     setActiveNav("Billing");
+  } else if (path.includes("/settings")) {
+    setActiveNav("Settings");
   }
 
   const topNavItems = [
@@ -48,6 +50,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
     if (item.name === "Published") navigate("/business/published");
     if (item.name === "Responses") navigate("/business/responses");
     if (item.name === "Billing") navigate("/business/billing");
+    if (item.name === "Settings") navigate("/business/settings");
   };
 
   if (isFormBuilder) {
@@ -132,7 +135,7 @@ const BusinessSideBar = ({ activeNav, setActiveNav }) => {
             return (
               <button
                 key={item.name}
-                onClick={() => setActiveNav(item.name)}
+                onClick={() => handleClick(item)}
                 className={`w-full flex items-center gap-[15px] px-[20px] py-[12px] rounded-full transition-all ${
                   isActive ? "bg-[#F0EBFD] text-[#6938EF]" : "text-[#667085]"
                 }`}

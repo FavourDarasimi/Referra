@@ -25,6 +25,7 @@ import BusinessLayout from "./layouts/BusinessLayout";
 import BusinessPublished from "./pages/Business/BusinessPublished";
 import BusinessResponses from "./pages/Business/BusinessResponses";
 import BusinessBilling from "./pages/Business/BusinessBilling";
+import BusinessSettings from "./pages/Business/BusinessSettings";
 
 function App() {
   const { toasts, removeToast } = useContext(Context);
@@ -84,6 +85,7 @@ function App() {
           <Route path="/business/published" element={<BusinessPublished />} />
           <Route path="/business/responses" element={<BusinessResponses />} />
           <Route path="/business/billing" element={<BusinessBilling />} />
+          <Route path="/business/settings" element={<BusinessSettings />} />
         </Route>
 
         {/* Individual Routes */}
